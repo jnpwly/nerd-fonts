@@ -89,10 +89,10 @@ function patch_font {
   local patched_font_dir="${patched_font_dir/$unpatched_parent_dir/$patched_parent_dir}"
 
   [[ -d "$patched_font_dir" ]] || mkdir -p "$patched_font_dir"
-  if [ -n ${purge} -a -d "${patched_font_dir}complete" ]
+  if [ -n ${purge} -a -d "${patched_font_dir}" ]
   then
-    echo "Purging patched font dir ${patched_font_dir}complete"
-    rm ${patched_font_dir}complete/*.[to]tf
+    echo "Purging patched font dir ${patched_font_dir}"
+    rm ${patched_font_dir}*.[to]tf
   fi
 
   config_parent_dir=$( cd "$( dirname "$f" )" && cd ".." && pwd)
@@ -142,13 +142,13 @@ function patch_font {
   }
   # Use absolute path to allow fontforge being an AppImage (used in CI)
   PWD=`pwd`
-  echo   "fontforge -quiet -script ${PWD}/font-patcher "$f" -q --also-windows $powerline $post_process --complete --no-progressbars --outputdir "${patched_font_dir}complete/" $config_patch_flags"
-  { OUT=$(fontforge -quiet -script ${PWD}/font-patcher "$f" -q --also-windows $powerline $post_process --complete --no-progressbars \
-                    --outputdir "${patched_font_dir}complete/" $config_patch_flags 2>&1 1>&3 3>&- ); } 3>&1
+  echo   "fontforge -quiet -script ${PWD}/font-patcher "$f" -q --windows $powerline $post_process --complete --makegroups --no-progressbars --outputdir "${patched_font_dir}" $config_patch_flags"
+  { OUT=$(fontforge -quiet -script ${PWD}/font-patcher "$f" -q --windows $powerline $post_process --complete --makegroups --no-progressbars \
+                    --outputdir "${patched_font_dir}" $config_patch_flags 2>&1 1>&3 3>&- ); } 3>&1
   if [ $? -ne 0 ]; then printf "$OUT\n"; fi
-  echo   "fontforge -quiet -script ${PWD}/font-patcher "$f" -q -s ${font_config} --also-windows $powerline $post_process --complete --no-progressbars --outputdir "${patched_font_dir}complete/" $config_patch_flags"
-  { OUT=$(fontforge -quiet -script ${PWD}/font-patcher "$f" -q -s ${font_config} --also-windows $powerline $post_process --complete --no-progressbars \
-                    --outputdir "${patched_font_dir}complete/" $config_patch_flags 2>&1 1>&3 3>&- ); } 3>&1
+  echo   "fontforge -quiet -script ${PWD}/font-patcher "$f" -q -s ${font_config} --windows $powerline $post_process --complete --makegroups --no-progressbars --outputdir "${patched_font_dir}" $config_patch_flags"
+  { OUT=$(fontforge -quiet -script ${PWD}/font-patcher "$f" -q -s ${font_config} --windows $powerline $post_process --complete --makegroups --no-progressbars \
+                    --outputdir "${patched_font_dir}" $config_patch_flags 2>&1 1>&3 3>&- ); } 3>&1
   if [ $? -ne 0 ]; then printf "$OUT\n"; fi
   # wait for this group of background processes to finish to avoid forking too many processes
   # that can add up quickly with the number of combinations
@@ -246,7 +246,7 @@ function copy_license {
 
   while IFS= read -d $'\0' -r license_file ; do
     # cp "$license_file" "$dest" # makes archiving multiple harder when we junk the paths for the archive
-    cp "$license_file" "$dest/complete"
+    cp "$license_file" "$dest"
   done < <(find "$src" -iregex ".*\(licen[c,s]e\|ofl\).*" -type f -print0)
 }
 

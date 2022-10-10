@@ -157,10 +157,11 @@ class FontnameParser:
 
     def fullname(self):
         """Get the SFNT Fullname (ID 4)"""
-        if self.for_windows:
-            win = 'Windows Compatible'
-        else:
-            win = ''
+        # if self.for_windows:
+        #     win = 'Windows Compatible'
+        # else:
+        #     win = ''
+        win = ''
         styles = self.style_token
         weights = self.weight_token
         if self.keep_regular_in_family == None:

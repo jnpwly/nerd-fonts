@@ -319,50 +319,50 @@ class font_patcher:
         font.fontname = font.persistent["fontname"]
         font.fullname = font.persistent["fullname"]
         font.familyname = font.persistent["familyname"]
-        verboseAdditionalFontNameSuffix = " " + projectNameSingular
+        verboseAdditionalFontNameSuffix = " " + projectNameAbbreviation # projectNameSingular
         if self.args.windows:  # attempt to shorten here on the additional name BEFORE trimming later
             additionalFontNameSuffix = " " + projectNameAbbreviation
         else:
             additionalFontNameSuffix = verboseAdditionalFontNameSuffix
-        if not self.args.complete:
-            # NOTE not all symbol fonts have appended their suffix here
-            if self.args.fontawesome:
-                additionalFontNameSuffix += " A"
-                verboseAdditionalFontNameSuffix += " Plus Font Awesome"
-            if self.args.fontawesomeextension:
-                additionalFontNameSuffix += " AE"
-                verboseAdditionalFontNameSuffix += " Plus Font Awesome Extension"
-            if self.args.octicons:
-                additionalFontNameSuffix += " O"
-                verboseAdditionalFontNameSuffix += " Plus Octicons"
-            if self.args.powersymbols:
-                additionalFontNameSuffix += " PS"
-                verboseAdditionalFontNameSuffix += " Plus Power Symbols"
-            if self.args.codicons:
-                additionalFontNameSuffix += " C"
-                verboseAdditionalFontNameSuffix += " Plus Codicons"
-            if self.args.pomicons:
-                additionalFontNameSuffix += " P"
-                verboseAdditionalFontNameSuffix += " Plus Pomicons"
-            if self.args.fontlogos:
-                additionalFontNameSuffix += " L"
-                verboseAdditionalFontNameSuffix += " Plus Font Logos"
-            if self.args.material:
-                additionalFontNameSuffix += " MDI"
-                verboseAdditionalFontNameSuffix += " Plus Material Design Icons"
-            if self.args.weather:
-                additionalFontNameSuffix += " WEA"
-                verboseAdditionalFontNameSuffix += " Plus Weather Icons"
-
-        # if all source glyphs included simplify the name
-        else:
-            additionalFontNameSuffix = " " + projectNameSingular + " Complete"
-            verboseAdditionalFontNameSuffix = " " + projectNameSingular + " Complete"
+        # if not self.args.complete:
+        #     # NOTE not all symbol fonts have appended their suffix here
+        #     if self.args.fontawesome:
+        #         additionalFontNameSuffix += " A"
+        #         verboseAdditionalFontNameSuffix += " Plus Font Awesome"
+        #     if self.args.fontawesomeextension:
+        #         additionalFontNameSuffix += " AE"
+        #         verboseAdditionalFontNameSuffix += " Plus Font Awesome Extension"
+        #     if self.args.octicons:
+        #         additionalFontNameSuffix += " O"
+        #         verboseAdditionalFontNameSuffix += " Plus Octicons"
+        #     if self.args.powersymbols:
+        #         additionalFontNameSuffix += " PS"
+        #         verboseAdditionalFontNameSuffix += " Plus Power Symbols"
+        #     if self.args.codicons:
+        #         additionalFontNameSuffix += " C"
+        #         verboseAdditionalFontNameSuffix += " Plus Codicons"
+        #     if self.args.pomicons:
+        #         additionalFontNameSuffix += " P"
+        #         verboseAdditionalFontNameSuffix += " Plus Pomicons"
+        #     if self.args.fontlogos:
+        #         additionalFontNameSuffix += " L"
+        #         verboseAdditionalFontNameSuffix += " Plus Font Logos"
+        #     if self.args.material:
+        #         additionalFontNameSuffix += " MDI"
+        #         verboseAdditionalFontNameSuffix += " Plus Material Design Icons"
+        #     if self.args.weather:
+        #         additionalFontNameSuffix += " WEA"
+        #         verboseAdditionalFontNameSuffix += " Plus Weather Icons"
+        #
+        # # if all source glyphs included simplify the name
+        # else:
+        #     additionalFontNameSuffix = " " + projectNameSingular + " Complete"
+        #     verboseAdditionalFontNameSuffix = " " + projectNameSingular + " Complete"
 
         # add mono signifier to end of name
         if self.args.single:
-            additionalFontNameSuffix += " M"
-            verboseAdditionalFontNameSuffix += " Mono"
+            additionalFontNameSuffix += "M" # " M"
+            verboseAdditionalFontNameSuffix += "M" # " Mono"
 
         if FontnameParserOK and self.args.makegroups:
             use_fullname = type(font.fullname) == str # Usually the fullname is better to parse
@@ -432,7 +432,7 @@ class font_patcher:
             familyname += " " + projectNameAbbreviation
             if self.args.single:
                 familyname += "M"
-            fullname += " Windows Compatible"
+            # fullname += " Windows Compatible"
 
             # now make sure less than 32 characters name length
             if len(fontname) > maxFontLength:
@@ -440,9 +440,9 @@ class font_patcher:
             if len(familyname) > maxFamilyLength:
                 familyname = familyname[:maxFamilyLength]
         else:
-            familyname += " " + projectNameSingular
+            familyname += " " + projectNameAbbreviation # projectNameSingular
             if self.args.single:
-                familyname += " Mono"
+                familyname += "M" # familyname += " Mono"
 
         # Don't truncate the subfamily to keep fontname unique.  MacOS treats fonts with
         # the same name as the same font, even if subFamily is different. Make sure to
@@ -490,6 +490,7 @@ class font_patcher:
             'fira sans'      : 'fura sans',
             'firamono'       : 'furamono',
             'firasans'       : 'furasans',
+            'mplus'          : 'M PLUS'
         }
 
         # remove overly verbose font names
@@ -511,6 +512,7 @@ class font_patcher:
             "* Changelog: https://github.com/ryanoasis/nerd-fonts/blob/master/changelog.md"
         )
 
+        print("familyname = '{}', fullname = '{}', fontname = '{}'".format(familyname, fullname, fontname))
         familyname = replace_font_name(familyname, reservedFontNameReplacements)
         fullname   = replace_font_name(fullname,   reservedFontNameReplacements)
         fontname   = replace_font_name(fontname,   reservedFontNameReplacements)
@@ -532,8 +534,8 @@ class font_patcher:
             font.appendSFNTName(str('English (US)'), str('Compatible Full'), font.fullname)
             font.appendSFNTName(str('English (US)'), str('SubFamily'), subFamily)
         else:
-            fam_suffix = projectNameSingular if not self.args.windows else projectNameAbbreviation
-            fam_suffix += ' Mono' if self.args.single else ''
+            fam_suffix = projectNameAbbreviation # projectNameSingular if not self.args.windows else projectNameAbbreviation
+            fam_suffix += 'M' if self.args.single else '' # ' Mono' if self.args.single else ''
             n.inject_suffix(verboseAdditionalFontNameSuffix, additionalFontNameSuffix, fam_suffix)
             n.rename_font(font)
 
