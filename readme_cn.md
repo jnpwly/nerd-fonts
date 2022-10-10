@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="images/nerd-fonts-logo.png" alt="Nerd Fonts Logo" />
+  <img src="images/nerd-fonts-logo.svg" alt="Nerd Fonts Logo" />
 </h1>
 
 [![GitHub release][img-version-badge-with-logo]][repo]&nbsp;[![Gitter][img-gitter-badge]][gitter]&nbsp;[![CodeClimate][img-code-climate-badge]][code-climate]&nbsp;[![Code of Conduct][coc-badge]][coc]&nbsp;[![PRs Welcome][prs-badge]][prs]&nbsp;&nbsp;&nbsp;[![Windows Logo][w-top]](#patched-fonts)&nbsp;&nbsp;&nbsp;[![macOS (OSX) Logo][m-top]](#patched-fonts)&nbsp;&nbsp;&nbsp;[![Linux Logo][l-top]](#patched-fonts)
@@ -142,7 +142,7 @@ _如果你..._
 ### [Font Logos][font-logos]
 > Font-logos 是一个包含LOGO和linux流行布局的图标字体。 / ([repo][font-logos])
 
-![image](images/fontforge-glyph-set-font-linux.png)
+![image](images/fontforge-glyph-set-font-logos.png)
 
 ### [Pomicons][gabrielelana-pomicons]
 > 8 个符号 ["Pomodoro Technique"®](https://cirillocompany.de/pages/pomodoro-technique). / ([repo][gabrielelana-pomicons])

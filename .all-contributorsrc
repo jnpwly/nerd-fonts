@@ -1111,10 +1111,30 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kurt-liao",
+      "name": "Kurt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32745146?v=4",
+      "profile": "https://blog.kurtstories.com/",
+      "contributions": [
+        "doc",
+        "translation"
+      ]
+    },
+    {
+      "login": "mrienstra",
+      "name": "Michael Rienstra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/669326?v=4",
+      "profile": "https://github.com/mrienstra",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "commitConvention": "angular"
 }
