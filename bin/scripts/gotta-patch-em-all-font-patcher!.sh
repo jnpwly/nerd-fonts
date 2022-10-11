@@ -54,10 +54,10 @@ if [ $# -eq 1 ] || [ "$1" != "" ]
 then
   if [[ "${1:0:1}" == "/" ]]
   then
-    like_pattern=".*$1/.*\.\(otf\|ttf\|sfd\)"
+    like_pattern=".*$1/.*\.\(otf\|ttf\|sfd\|ttc\)"
     echo "$LINE_PREFIX Parameter given, limiting search and patch to pathname pattern '$1' given"
   else
-    like_pattern=".*/$1[^/]*\.\(otf\|ttf\|sfd\)"
+    like_pattern=".*/$1[^/]*\.\(otf\|ttf\|sfd\|ttc\)"
     echo "$LINE_PREFIX Parameter given, limiting search and patch to filename pattern '$1' given"
   fi
 fi
@@ -300,7 +300,7 @@ then
       # some of the source font files in that directory.
       last_source_dir=${current_source_dir}
       num_to_patch=$(find "${current_source_dir}" -iregex ${like_pattern} -type f | wc -l)
-      num_existing=$(find "${current_source_dir}" -iname "*.[o,t]tf" -o -iname "*.sfd" -type f | wc -l)
+      num_existing=$(find "${current_source_dir}" -iname "*.[o,t]tf" -o -iname "*.sfd" -o -iname "*.ttc" -type f | wc -l)
       if [ ${num_to_patch} -eq ${num_existing} ]
       then
         purge_destination="TRUE"
